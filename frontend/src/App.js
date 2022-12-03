@@ -9,10 +9,11 @@ function App() {
   return (
     <Router>
       <Header />
+
       <main>
         <Routes>
-          <Route path='/' component={ToDoScreen} exact />
-          <Route path='/login' component={LoginScreen} />
+          <Route path='/' element={<ToDoScreen />} exact />
+          <Route path='/login' element={<LoginScreen />} exact />
         </Routes>
       </main>
     </Router>
