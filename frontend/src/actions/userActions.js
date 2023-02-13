@@ -5,6 +5,7 @@ import {
   USER_LOGIN_SUCCESS,
 } from '../constants/userConstants'
 
+// Login User
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
@@ -27,6 +28,7 @@ export const login = (email, password) => async (dispatch) => {
       payload: data,
     })
 
+    // Set user to localStorage
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({

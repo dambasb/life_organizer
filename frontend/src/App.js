@@ -13,12 +13,12 @@ function App() {
   return (
     <Router>
       <main>
-        {pathname !== 'login' || (pathname !== 'singup' && <Header />)}
+        {pathname !== 'login' && pathname !== 'register' && <Header />}
 
         <Routes>
           <Route path='/' element={<ToDoScreen />} exact />
           <Route path='/login' element={<AuthScreen />} exact />
-          <Route path='/singup' element={<AuthScreen />} exact />
+          <Route path='/register' element={<AuthScreen />} exact />
         </Routes>
       </main>
     </Router>

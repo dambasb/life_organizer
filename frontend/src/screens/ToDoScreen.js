@@ -14,7 +14,7 @@ const ToDoScreen = () => {
   }
 
   return (
-    <>
+    <div className='container'>
       <Container className='todoScreen'>
         <Row>
           <Col>
@@ -65,7 +65,7 @@ const ToDoScreen = () => {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   )
 }
 
