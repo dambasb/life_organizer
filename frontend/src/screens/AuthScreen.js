@@ -22,11 +22,7 @@ const AuthScreen = ({ history }) => {
   const userLogin = useSelector(state => state.userLogin)
   const { loading, error, userInfo } = userLogin
 
-  useEffect(() => {
-    if (userInfo) {
-      history.push('/login')
-    }
-  }, [history, userInfo])
+
 
   // Submit Form
   const submitHandler = (e) => {
