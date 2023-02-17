@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from 'react-router-dom'
+import { Link, } from 'react-router-dom'
 import FormContainer from '../components/FormContainer'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { login } from '../actions/userActions'
 
-const AuthScreen = ({ history }) => {
+const AuthScreen = () => {
   // Get url pathname to check is it login or register
   const urlPathname = window.location.pathname
   const pathname = urlPathname.replace('/', '')
@@ -22,7 +22,16 @@ const AuthScreen = ({ history }) => {
   const userLogin = useSelector(state => state.userLogin)
   const { loading, error, userInfo } = userLogin
 
+  // Redirect if user logged
 
+
+
+  useEffect(() => {
+    if (userInfo) {
+      window.location = '/'
+    }
+  }, [userInfo]
+  )
 
   // Submit Form
   const submitHandler = (e) => {

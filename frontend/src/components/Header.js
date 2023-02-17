@@ -1,13 +1,25 @@
 import React from 'react'
-import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import Image from 'react-bootstrap/Image'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { Container, Nav, Navbar, NavDropdown, Image } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
+import { logout } from '../actions/userActions'
 import avatar from '../assets/avatar.png'
 
 function Header() {
+  const dispatch = useDispatch()
+
+  // Get Logged User data
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
+  console.log(userInfo)
+
+  // Logout User
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
+
+
   return (
     <Navbar bg='light' expand='lg'>
       <Container>
@@ -19,20 +31,28 @@ function Header() {
             <Nav.Link href='#link'>Link</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link eventKey={2} href='#memes'>
-              Dank memes
-            </Nav.Link>
-            <Image className='avatar' src={avatar} />
-            <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
-              <NavDropdown.Item href='#action/3.1'>Action</NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.2'>
-                Another action
-              </NavDropdown.Item>
-            </NavDropdown>
+
+            {userInfo ? (<>
+              <Nav.Link eventKey={2} href='#memes'>
+                {userInfo.name}
+              </Nav.Link>
+              <Image className='avatar' src={avatar} />
+              <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
+                <NavDropdown.Item href='#action/3.1'>Action</NavDropdown.Item>
+                <NavDropdown.Item onClick={logoutHandler}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            </>) : <Link as={Link} to='/login'>
+              Login
+            </Link>}
+
+
+
           </Nav>
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+    </Navbar >
   )
 }
 
