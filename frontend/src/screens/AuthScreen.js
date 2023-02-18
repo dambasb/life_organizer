@@ -5,17 +5,20 @@ import { Link, } from 'react-router-dom'
 import FormContainer from '../components/FormContainer'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { login } from '../actions/userActions'
+import { login, register } from '../actions/userActions'
 
 const AuthScreen = () => {
   // Get url pathname to check is it login or register
   const urlPathname = window.location.pathname
   const pathname = urlPathname.replace('/', '')
+  const isLogin = (pathname === 'login') ? true : false;
 
   // Hook Form inputs
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [message, setMessage] = useState(null)
 
   const dispatch = useDispatch()
 
@@ -23,9 +26,6 @@ const AuthScreen = () => {
   const { loading, error, userInfo } = userLogin
 
   // Redirect if user logged
-
-
-
   useEffect(() => {
     if (userInfo) {
       window.location = '/'
@@ -37,18 +37,38 @@ const AuthScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    console.log(name, email, password)
+    // Check if login or register
+    if (isLogin) {
+      dispatch(login(email, password))
+    } else {
 
-    dispatch(login(email, password))
-
-    //* TO-DO register
+      // Check password match
+      if (password !== confirmPassword) {
+        setMessage('Passwords do not match.')
+      } else {
+        dispatch(register(name, email, password))
+      }
+    }
   }
 
   return <FormContainer>
-    {pathname === 'login' ? <h1>Log In</h1> : <h1>Register</h1>}
+    {isLogin ? <h1>Log In</h1> : <h1>Register</h1>}
+    {message && <Message variant='danger'>{message}</Message>}
     {error && <Message variant='danger'>{error}</Message>}
     {loading && <Loader />}
     <Form onSubmit={submitHandler}>
+
+      {!isLogin &&
+        <Form.Group controlId='name'>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter Name'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+      }
       <Form.Group controlId='email'>
         <Form.Label>Email Address</Form.Label>
         <Form.Control
@@ -69,19 +89,33 @@ const AuthScreen = () => {
         ></Form.Control>
       </Form.Group>
 
-      <Button type='submit' variant='primary'>
-        Sign In
-      </Button>
+      {!isLogin &&
+        <Form.Group controlId='password'>
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Confirm Password'
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+      }
+      {isLogin ? (<Button type='submit' variant='primary'>
+        Login
+      </Button>) : (<Button type='submit' variant='primary'>
+        Register
+      </Button>)}
     </Form>
 
     <Row className='ps-3'>
       <Col>
         {' '}
-        {pathname === 'login' ? (<>
+        {isLogin ? (<>
           <span>New Customer?</span><Link to={'/register'}>Register.</Link>
         </>) : (
           <>
-            <span>Already have account?</span> <Link to={'/login'}>Login.</Link></>
+            <span>Already have account?</span> <Link to={'/login'}>Login.</Link>
+          </>
         )}
       </Col>
     </Row>
