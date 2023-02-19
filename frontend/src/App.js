@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import AuthScreen from './screens/AuthScreen'
+import ProfileScreen from './screens/ProfileScreen'
 import ToDoScreen from './screens/ToDoScreen'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' element={<ToDoScreen />} exact />
           <Route path='/login' element={<AuthScreen />} exact />
           <Route path='/register' element={<AuthScreen />} exact />
+          <Route path='/profile' element={<ProfileScreen />} exact />
         </Routes>
       </main>
     </Router>

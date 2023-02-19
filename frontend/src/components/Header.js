@@ -12,8 +12,6 @@ function Header() {
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
-  console.log(userInfo)
-
   // Logout User
   const logoutHandler = () => {
     dispatch(logout())
@@ -38,7 +36,7 @@ function Header() {
               </Nav.Link>
               <Image className='avatar' src={avatar} />
               <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
-                <NavDropdown.Item href='#action/3.1'>Action</NavDropdown.Item>
+                <NavDropdown.Item href='/profile'>Profile</NavDropdown.Item>
                 <NavDropdown.Item onClick={logoutHandler}>
                   Logout
                 </NavDropdown.Item>
