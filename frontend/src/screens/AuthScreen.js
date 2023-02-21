@@ -51,74 +51,78 @@ const AuthScreen = () => {
     }
   }
 
-  return <FormContainer>
-    {isLogin ? <h1>Log In</h1> : <h1>Register</h1>}
-    {message && <Message variant='danger'>{message}</Message>}
-    {error && <Message variant='danger'>{error}</Message>}
-    {loading && <Loader />}
-    <Form onSubmit={submitHandler}>
+  return <FormContainer >
+    <div className='login'>
+      <div className='login__body'>
+        {isLogin ? <h1>Log In</h1> : <h1>Register</h1>}
+        {message && <Message variant='danger'>{message}</Message>}
+        {error && <Message variant='danger'>{error}</Message>}
+        {loading && <Loader />}
+        <Form onSubmit={submitHandler}>
 
-      {!isLogin &&
-        <Form.Group controlId='name'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Enter Name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-      }
-      <Form.Group controlId='email'>
-        <Form.Label>Email Address</Form.Label>
-        <Form.Control
-          type='email'
-          placeholder='Enter email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        ></Form.Control>
-      </Form.Group>
+          {!isLogin &&
+            <Form.Group controlId='name'>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter Name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+          }
+          <Form.Group controlId='email'>
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control
+              type='email'
+              placeholder='Enter email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-      <Form.Group controlId='password'>
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type='password'
-          placeholder='Enter Password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></Form.Control>
-      </Form.Group>
+          <Form.Group controlId='password'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type='password'
+              placeholder='Enter Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
 
-      {!isLogin &&
-        <Form.Group controlId='password'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Confirm Password'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-      }
-      {isLogin ? (<Button type='submit' variant='primary'>
-        Login
-      </Button>) : (<Button type='submit' variant='primary'>
-        Register
-      </Button>)}
-    </Form>
+          {!isLogin &&
+            <Form.Group controlId='password'>
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Confirm Password'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+          }
+          {isLogin ? (<Button type='submit' variant='primary'>
+            Login
+          </Button>) : (<Button type='submit' variant='primary'>
+            Register
+          </Button>)}
+        </Form>
 
-    <Row className='ps-3'>
-      <Col>
-        {' '}
-        {isLogin ? (<>
-          <span>New Customer?</span><Link to={'/register'}>Register.</Link>
-        </>) : (
-          <>
-            <span>Already have account?</span> <Link to={'/login'}>Login.</Link>
-          </>
-        )}
-      </Col>
-    </Row>
+        <Row className='ps-3'>
+          <Col>
+            {' '}
+            {isLogin ? (<>
+              <span>New Customer?</span><Link to={'/register'}>Register.</Link>
+            </>) : (
+              <>
+                <span>Already have account?</span> <Link to={'/login'}>Login.</Link>
+              </>
+            )}
+          </Col>
+        </Row>
+      </div>
+    </div>
   </FormContainer>
 }
 

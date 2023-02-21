@@ -1,3 +1,9 @@
+:root {
+  --blue: #6495ed;
+  --white: #ffffff;
+  --dark-blue: #343A40;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -12,8 +18,50 @@ code {
     monospace;
 }
 
+
+
+/* Header */
+nav a{
+  color: var(--white) !important;
+}
+
 .avatar {
   height: 35px;
-  border: 2px solid black;
+  border: 2px solid var(--white);
   border-radius: 50%;
+}
+
+.dropdown-menu a{
+  color: var(--dark-blue )!important;
+}
+
+/* AuthScreen */
+
+.login {
+  position: relative;
+  height: 100%;
+}
+
+.login__body {
+  position: absolute;
+  top: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  z-index: 1;
+  color: var(--white);
+  padding: 20px;
+  left: 0;
+  right: 0;
+}
+.login h1 {
+  margin-top: 50px;
+}
+.login button {
+  margin: 20px 0 ;
+}
+.login span{
+  color: var(--dark-blue);
+  margin-right: 10px;
+  
 }
