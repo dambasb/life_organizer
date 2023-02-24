@@ -83,7 +83,7 @@ const ProfileScreen = () => {
     <Container>
       <Row>
         <Col md={4}>
-          <h2>User Profile</h2>
+          <h2 className='screen__title'>User Profile</h2>
           {message && <Message variant='danger'>{message}</Message>}
           {error && <Message variant='danger'>{error}</Message>}
           {success && <Message variant='success'>Profile Updated</Message>}
@@ -111,6 +111,7 @@ const ProfileScreen = () => {
             </Form.Group>
 
             <Form.Group>
+              <Form.Label>Profile Image</Form.Label>
               <Form.Control type='file' id='image-file' label='Chose File' custom='true' onChange={uploadFileHandler}>
               </Form.Control>
             </Form.Group>

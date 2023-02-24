@@ -16,7 +16,7 @@ const ToDoScreen = () => {
       <Container className='todoScreen'>
         <Row>
           <Col>
-            <h2>To Do List</h2>
+            <h2 className='screen__title'>To Do List</h2>
           </Col>
         </Row>
         <Row className='listCol'>

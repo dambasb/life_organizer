@@ -31,6 +31,7 @@ nav a{
 .avatar {
   height: 50px;
   width: 50px;
+  margin: 0 10px;
   border: 2px solid var(--white);
   border-radius: 50%;
 }
@@ -68,4 +69,16 @@ nav a{
   color: var(--dark-blue);
   margin-right: 10px;
   
+}
+
+/* Screen General */
+.screen__title {
+  padding-top: 40px;
+  padding-bottom: 15px;
+}
+
+
+/* Form General */
+form input {
+  margin-bottom: 15px;
 }

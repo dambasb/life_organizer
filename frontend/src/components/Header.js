@@ -21,7 +21,7 @@ function Header() {
   return (
     <Navbar bg='dark' expand='lg'>
       <Container>
-        <Navbar.Brand href='/'>React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href='/'>Life Organizer</Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
@@ -35,7 +35,7 @@ function Header() {
                 {userInfo.name}
               </Nav.Link>
               <Image className='avatar' src={`http://localhost:5000/uploads/${userInfo.image}`} />
-              <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
+              <NavDropdown title='Settings' id='basic-nav-dropdown'>
                 <NavDropdown.Item href='/profile'>Profile</NavDropdown.Item>
                 <NavDropdown.Item onClick={logoutHandler}>
                   Logout
