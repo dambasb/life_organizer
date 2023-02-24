@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
 import Message from '../components/Message'
@@ -14,6 +15,8 @@ const ProfileScreen = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
+  const [image, setImage] = useState('')
+  const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -41,6 +44,30 @@ const ProfileScreen = () => {
     }
   }, [dispatch, userInfo, user, success])
 
+  const uploadFileHandler = async (e) => {
+
+    const file = e.target.files[0]
+
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+      const { data } = await axios.post('/api/upload', formData, config)
+
+      setImage(data)
+      setUploading(false)
+    } catch (error) {
+      console.log(error)
+      setUploading(false)
+    }
+  }
+
   // Submit Form
   const submitHandler = (e) => {
     e.preventDefault()
@@ -48,7 +75,7 @@ const ProfileScreen = () => {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match.')
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }))
+      dispatch(updateUserProfile({ id: user._id, name, email, password, image }))
     }
   }
 
@@ -83,6 +110,11 @@ const ProfileScreen = () => {
               ></Form.Control>
             </Form.Group>
 
+            <Form.Group>
+              <Form.Control type='file' id='image-file' label='Chose File' custom='true' onChange={uploadFileHandler}>
+              </Form.Control>
+            </Form.Group>
+
             <Form.Group controlId='password'>
               <Form.Label>Password</Form.Label>
               <Form.Control
@@ -112,4 +144,4 @@ const ProfileScreen = () => {
   )
 }
 
-export default ProfileScreen
+export default ProfileScreen 

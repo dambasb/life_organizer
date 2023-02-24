@@ -34,7 +34,7 @@ function Header() {
               <Nav.Link eventKey={2} href='#memes'>
                 {userInfo.name}
               </Nav.Link>
-              <Image className='avatar' src={avatar} />
+              <Image className='avatar' src={`http://localhost:5000/uploads/${userInfo.image}`} />
               <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
                 <NavDropdown.Item href='/profile'>Profile</NavDropdown.Item>
                 <NavDropdown.Item onClick={logoutHandler}>
