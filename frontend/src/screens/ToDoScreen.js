@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
-import { Container, Row, Col, Button, Form, Image } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
-
+import { useDispatch } from 'react-redux'
+import { Container, Row, Col, Button, Form } from 'react-bootstrap'
+import { createTodo } from '../actions/todoActions'
 
 const ToDoScreen = () => {
   const [task, setTask] = useState('')
 
+  const dispatch = useDispatch()
+
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log(task)
+    dispatch(createTodo(task, 'In Progress'))
   }
 
   return (

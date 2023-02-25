@@ -1,15 +1,19 @@
 import mongoose from 'mongoose'
 
 const todoSchema = mongoose.Schema({
-  User: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'User',
   },
-  title: {
+  text: {
     type: String,
     required: true,
   },
+  progress: {
+    type: String,
+    required: true
+  }
 })
 
 const Todo = mongoose.model('Todo', todoSchema)

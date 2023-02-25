@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Container, Nav, Navbar, NavDropdown, Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/userActions'
-import avatar from '../assets/avatar.png'
 
 function Header() {
   const dispatch = useDispatch()
