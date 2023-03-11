@@ -10,7 +10,7 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   createTodo: todoCreateReducer,
-  getTodos: getTodosReducer
+  todos: getTodosReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

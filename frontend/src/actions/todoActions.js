@@ -39,13 +39,13 @@ export const createTodo = (text, progress) => async (dispatch, getState) => {
 }
 
 // Get Todos
-export const getTodos = () => async (dispatch, getState) => {
+export const getAllTodos = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: GET_TODOS_REQUEST,
     })
     const { userLogin: { userInfo } } = getState()
-    console.log('User', userInfo)
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export const getTodos = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post(
+    const { data } = await axios.get(
       '/api/todos',
       config
     )

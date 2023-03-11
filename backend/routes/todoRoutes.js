@@ -4,8 +4,8 @@ import { protect } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
-router.route('/').get(getTodos).post(protect, postTodo)
-router.route('/:id').get(getTodoById)
+router.route('/').get(protect, getTodos).post(protect, postTodo)
+router.route('/:id').get(protect, getTodoById)
 
 
 export default router

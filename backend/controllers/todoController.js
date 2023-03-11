@@ -7,10 +7,26 @@ import User from '../models/userModel.js'
 // @access      Private
 
 const getTodos = asyncHandler(async (req, res) => {
-  const todos = await Todo.find({})
-  res.send('GET Todo...')
-})
+  try {
 
+    const user = await User.findById(req.user).select('id')
+    let todos = []
+    if (req.query.progress === undefined) {
+      todos = await Todo.find({ user: user._id })
+    }
+    else {
+      const progress = req.query.progress
+      todos = await Todo.find({ user: user._id, progress })
+    }
+
+    res.json(todos)
+  } catch (error) {
+    res.status(500)
+
+    throw new Error(error)
+
+  }
+})
 
 // @desc        Post todo
 // @route       POST /api/todos
