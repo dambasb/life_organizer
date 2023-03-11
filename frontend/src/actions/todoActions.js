@@ -3,7 +3,7 @@ import { GET_TODOS_FAIL, GET_TODOS_REQUEST, GET_TODOS_SUCCESS, TODO_CREATE_FAIL,
 
 // Create Todo
 export const createTodo = (text, progress) => async (dispatch, getState) => {
-
+  console.log(progress)
   try {
     dispatch({
       type: TODO_CREATE_REQUEST,
