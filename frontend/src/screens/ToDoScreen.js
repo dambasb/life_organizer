@@ -4,39 +4,22 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import { createTodo, getAllTodos } from '../actions/todoActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import TodoList from '../components/TodoList'
 
 const ToDoScreen = () => {
   const [task, setTask] = useState('')
   const dispatch = useDispatch()
 
-
   useEffect(() => {
     dispatch(getAllTodos())
   }, [dispatch, getAllTodos])
 
-
   const allTodos = useSelector(state => state.todos)
   const { loading, error, todos } = allTodos
-
 
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(createTodo(task, 'New'))
-  }
-
-
-  let newTodos = []
-  if (todos !== undefined) {
-    newTodos = Object.values(todos).filter(item => item.progress === 'New').map(filteredNewItems => (
-      { filteredNewItems }
-    ))
-  }
-
-  let inProgressTodos = []
-  if (todos !== undefined) {
-    inProgressTodos = Object.values(todos).filter(item => item.progress === 'In Progress').map(filteredItems => (
-      { filteredItems }
-    ))
   }
 
   return (
@@ -57,42 +40,15 @@ const ToDoScreen = () => {
           </Row>
           <Row className='listCol'>
             <Col>
-              <h4>To Do</h4>
-              <ul>
-                {
-                  (newTodos).map(function (item, key) {
-                    return (
-                      <li key={key}>
-                        {item.filteredNewItems.text}
-                      </li>
-                    )
-                  })
-                }
-              </ul>
-
+              <TodoList data={todos} progress={'New'}></TodoList>
             </Col>
             <Col>
-              <h4>In Progress</h4>
-              <ul>
-                {
-                  (inProgressTodos).map(function (item, key) {
-
-                    return (
-                      <li key={key}>
-                        {item.filteredItems.text}
-                      </li>
-                    )
-                  })
-                }
-              </ul>
+              <TodoList data={todos} progress={'In Progress'}></TodoList>
             </Col>
             <Col>
-              <h4>Done</h4>
-              <ul>
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-              </ul>
+
+              <TodoList data={todos} progress={'Done'}></TodoList>
+
             </Col>
           </Row>
           <Row>

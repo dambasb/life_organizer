@@ -54,6 +54,35 @@ const postTodo = asyncHandler(async (req, res) => {
   }
 })
 
+
+// @desc        Delete todo
+// @route       DELETE /api/todos/:id
+// @access      Private
+
+const deleteTodo = asyncHandler(async (req, res) => {
+
+  try {
+
+    const todo = await Todo.findById(req.params.id)
+
+    // Check user
+    if (todo.user !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' })
+      //res.status(401)
+      //throw new Error('Server error')
+    }
+    const user = await User.findById(req.user).select('-password')
+
+    await todo.remove()
+
+    res.json({ msg: 'Todo removed' })
+
+  } catch (error) {
+    res.status(500)
+    throw new Error('Server error')
+  }
+})
+
 //TODO Some error
 // @desc        Fetch single todo
 // @route       GET /api/todos/:id

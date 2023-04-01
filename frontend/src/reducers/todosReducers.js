@@ -1,4 +1,4 @@
-import { GET_TODOS_FAIL, GET_TODOS_REQUEST, GET_TODOS_SUCCESS, TODO_CREATE_FAIL, TODO_CREATE_REQUEST, TODO_CREATE_SUCCESS } from "../constants/todosConstants"
+import { DELETE_TODOS_FAIL, DELETE_TODOS_REQUEST, DELETE_TODOS_SUCCESS, GET_TODOS_FAIL, GET_TODOS_REQUEST, GET_TODOS_SUCCESS, TODO_CREATE_FAIL, TODO_CREATE_REQUEST, TODO_CREATE_SUCCESS } from "../constants/todosConstants"
 
 
 export const todoCreateReducer = (state = {}, action) => {
@@ -21,6 +21,19 @@ export const getTodosReducer = (state = { todos: {} }, action) => {
     case GET_TODOS_SUCCESS:
       return { loading: false, todos: action.payload }
     case GET_TODOS_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const deleteTodoReducer = (state = { todos: {} }, action) => {
+  switch (action.type) {
+    case DELETE_TODOS_REQUEST:
+      return { loading: true }
+    case DELETE_TODOS_SUCCESS:
+      return { loading: false, todos: action.payload }
+    case DELETE_TODOS_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state
