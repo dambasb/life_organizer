@@ -23,8 +23,13 @@ const TodoList = ({ data, progress }) => {
     }
   }
 
-  function doneTodoHandler(id) {
-    dispatch(updateTodo(id))
+  function changeTodoProgressHandler(todo) {
+
+    const changedProgres = progress === 'In Progress' ? 'Done' : 'In Progress'
+
+    console.log(todo.progress)
+    todo.progress = changedProgres
+    dispatch(updateTodo(todo))
   }
 
   return (<>
@@ -37,7 +42,7 @@ const TodoList = ({ data, progress }) => {
             <li key={key}>
               {item.filteredItems.text}
               <span className="todo__icons"><FontAwesomeIcon icon={faX} style={{ color: "#ff0000", }} onClick={e => deleteTodoHandler(item.filteredItems._id)} /></span>
-              <span className="todo__icons"><FontAwesomeIcon icon={faCheck} style={{ color: "#0000ff", }} onClick={e => doneTodoHandler(item.filteredItems._id)} /></span>
+              <span className="todo__icons"><FontAwesomeIcon icon={faCheck} style={{ color: "#0000ff", }} onClick={e => changeTodoProgressHandler(item.filteredItems)} /></span>
 
             </li>
           )

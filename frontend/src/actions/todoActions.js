@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DELETE_TODOS_FAIL, DELETE_TODOS_REQUEST, DELETE_TODOS_SUCCESS, GET_TODOS_FAIL, GET_TODOS_REQUEST, GET_TODOS_SUCCESS, TODO_CREATE_FAIL, TODO_CREATE_REQUEST, TODO_CREATE_SUCCESS } from "../constants/todosConstants";
+import { DELETE_TODOS_FAIL, DELETE_TODOS_REQUEST, DELETE_TODOS_SUCCESS, GET_TODOS_FAIL, GET_TODOS_REQUEST, GET_TODOS_SUCCESS, TODO_CREATE_FAIL, TODO_CREATE_REQUEST, TODO_CREATE_SUCCESS, UPDATE_TODOS_FAIL, UPDATE_TODOS_REQUEST, UPDATE_TODOS_SUCCESS } from "../constants/todosConstants";
 
 // Create Todo
 export const createTodo = (text, progress) => async (dispatch, getState) => {
@@ -109,11 +109,12 @@ export const deleteTodo = (id) => async (dispatch, getState) => {
   }
 }
 
-// Delete Todo
-export const updateTodo = () => async (dispatch, getState) => {
+// Update Todo
+export const updateTodo = (todo) => async (dispatch, getState) => {
+
   try {
     dispatch({
-      type: DELETE_TODOS_REQUEST,
+      type: UPDATE_TODOS_REQUEST,
     })
     const { userLogin: { userInfo } } = getState()
 
@@ -124,19 +125,19 @@ export const updateTodo = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(
-      '/api/todos',
+    const { data } = await axios.put(
+      `/api/todos/${todo._id}`, todo,
       config
     )
-
+    console.log(data)
     dispatch({
-      type: GET_TODOS_SUCCESS,
+      type: UPDATE_TODOS_SUCCESS,
       payload: data,
     })
 
   } catch (error) {
     dispatch({
-      type: GET_TODOS_FAIL,
+      type: UPDATE_TODOS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

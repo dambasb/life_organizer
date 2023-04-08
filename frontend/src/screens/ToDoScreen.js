@@ -13,13 +13,17 @@ const ToDoScreen = () => {
   const allTodos = useSelector(state => state.todos)
   const { loading, error, todos } = allTodos
 
-  // Add to get success delete to list todos again
+  // To get success delete to list todos again
   const todoDelete = useSelector((state) => state.todoDelete)
   const { loading: loadingDelete, error: errorDelete, success: successDelete } = todoDelete
 
+  // To get success delete to list todos again
+  const todoUpdate = useSelector((state) => state.todoUpdate)
+  const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = todoUpdate
+
   useEffect(() => {
     dispatch(getAllTodos())
-  }, [dispatch, getAllTodos, successDelete])
+  }, [dispatch, getAllTodos, successDelete, successUpdate])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -31,7 +35,7 @@ const ToDoScreen = () => {
 
     <div className='container'>
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-      {loading || loadingDelete ? (
+      {loading || loadingDelete || loadingUpdate ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>

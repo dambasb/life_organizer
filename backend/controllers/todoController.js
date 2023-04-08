@@ -82,19 +82,44 @@ const deleteTodo = asyncHandler(async (req, res) => {
   }
 })
 
-//TODO Some error
 // @desc        Fetch single todo
 // @route       GET /api/todos/:id
-// @access      Public
+// @access      Private
 const getTodoById = asyncHandler(async (req, res) => {
   const todo = await Todo.findById(req.params.id)
 
   if (todo) {
-    res.send('Single Todo...')
+    res.json(todo)
   } else {
     res.status(404).json({ message: 'Todo not found...' })
   }
   res.send('Single Todo...')
 })
 
-export { getTodos, getTodoById, postTodo, deleteTodo }
+// @desc        Update single todo
+// @route       PUT /api/todos/:id
+// @access      Private
+const updateTodo = asyncHandler(async (req, res) => {
+
+  const todo = await Todo.findById(req.params.id)
+
+  if (todo) {
+    todo.text = req.body.text || todo.text
+    todo.progress = req.body.progress || todo.progress
+
+    const updatedTodo = await todo.save()
+
+    res.json({
+      _id: updatedTodo._id,
+      text: updatedTodo.text,
+      progress: updatedTodo.progress,
+    })
+  } else {
+    res.status(401)
+    throw new Error('Todo not found')
+  }
+})
+
+export { getTodos, getTodoById, postTodo, deleteTodo, updateTodo }
+
+
