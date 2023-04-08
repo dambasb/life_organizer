@@ -24,10 +24,10 @@ const ToDoScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(createTodo(task, 'In Progress'))
+    dispatch(getAllTodos())
   }
 
   return (
-
 
     <div className='container'>
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}

@@ -3,7 +3,6 @@ import { DELETE_TODOS_FAIL, DELETE_TODOS_REQUEST, DELETE_TODOS_SUCCESS, GET_TODO
 
 // Create Todo
 export const createTodo = (text, progress) => async (dispatch, getState) => {
-  console.log(progress)
   try {
     dispatch({
       type: TODO_CREATE_REQUEST,
