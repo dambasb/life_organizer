@@ -82,3 +82,9 @@ nav a{
 form input {
   margin-bottom: 15px;
 }
+
+
+.todo__icons{
+  float: right;
+  margin-left: 10px !important;
+}

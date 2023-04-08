@@ -60,22 +60,21 @@ const postTodo = asyncHandler(async (req, res) => {
 // @access      Private
 
 const deleteTodo = asyncHandler(async (req, res) => {
-
   try {
-
     const todo = await Todo.findById(req.params.id)
 
-    // Check user
-    if (todo.user !== req.user.id) {
-      return res.status(401).json({ msg: 'User not authorized' })
-      //res.status(401)
-      //throw new Error('Server error')
+    if (todo) {
+      await todo.remove()
+      res.json({ msg: 'Todo removed' })
+    } else {
+      res.status(404)
+      throw new Error({ msg: 'Todo not found' })
     }
-    const user = await User.findById(req.user).select('-password')
 
-    await todo.remove()
-
-    res.json({ msg: 'Todo removed' })
+    // Check user
+    if (todo.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' })
+    }
 
   } catch (error) {
     res.status(500)
@@ -98,4 +97,4 @@ const getTodoById = asyncHandler(async (req, res) => {
   res.send('Single Todo...')
 })
 
-export { getTodos, getTodoById, postTodo }
+export { getTodos, getTodoById, postTodo, deleteTodo }

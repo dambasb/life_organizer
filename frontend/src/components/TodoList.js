@@ -1,12 +1,31 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faX, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteTodo, updateTodo } from '../actions/todoActions'
+
+
 
 const TodoList = ({ data, progress }) => {
+
+  const dispatch = useDispatch()
+
 
   let filteredData = []
   if (data !== undefined) {
     filteredData = Object.values(data).filter(item => item.progress === progress).map(filteredItems => (
       { filteredItems }
     ))
+  }
+
+  function deleteTodoHandler(id) {
+    if (window.confirm('Are you sure?')) {
+      dispatch(deleteTodo(id))
+    }
+  }
+
+  function doneTodoHandler(id) {
+    dispatch(updateTodo(id))
   }
 
   return (<>
@@ -18,6 +37,9 @@ const TodoList = ({ data, progress }) => {
           return (
             <li key={key}>
               {item.filteredItems.text}
+              <span className="todo__icons"><FontAwesomeIcon icon={faX} style={{ color: "#ff0000", }} onClick={e => deleteTodoHandler(item.filteredItems._id)} /></span>
+              <span className="todo__icons"><FontAwesomeIcon icon={faCheck} style={{ color: "#0000ff", }} onClick={e => doneTodoHandler(item.filteredItems._id)} /></span>
+
             </li>
           )
         })

@@ -27,12 +27,15 @@ export const getTodosReducer = (state = { todos: {} }, action) => {
   }
 }
 
-export const deleteTodoReducer = (state = { todos: {} }, action) => {
+export const deleteTodoReducer = (state = {}, action) => {
+
   switch (action.type) {
     case DELETE_TODOS_REQUEST:
       return { loading: true }
     case DELETE_TODOS_SUCCESS:
-      return { loading: false, todos: action.payload }
+      return {
+        loading: false, success: true
+      }
     case DELETE_TODOS_FAIL:
       return { loading: false, error: action.payload }
     default:

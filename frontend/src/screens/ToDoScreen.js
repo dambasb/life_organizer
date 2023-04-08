@@ -10,24 +10,28 @@ const ToDoScreen = () => {
   const [task, setTask] = useState('')
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getAllTodos())
-  }, [dispatch, getAllTodos])
-
   const allTodos = useSelector(state => state.todos)
   const { loading, error, todos } = allTodos
 
+  // Add to get success delete to list todos again
+  const todoDelete = useSelector((state) => state.todoDelete)
+  const { loading: loadingDelete, error: errorDelete, success: successDelete } = todoDelete
+
+  useEffect(() => {
+    dispatch(getAllTodos())
+  }, [dispatch, getAllTodos, successDelete])
+
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(createTodo(task, 'New'))
+    dispatch(createTodo(task, 'In Progress'))
   }
 
   return (
 
 
     <div className='container'>
-
-      {loading ? (
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+      {loading || loadingDelete ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
@@ -39,13 +43,11 @@ const ToDoScreen = () => {
             </Col>
           </Row>
           <Row className='listCol'>
-            <Col>
-              <TodoList data={todos} progress={'New'}></TodoList>
-            </Col>
-            <Col>
+
+            <Col xs={3}>
               <TodoList data={todos} progress={'In Progress'}></TodoList>
             </Col>
-            <Col>
+            <Col xs={3}>
 
               <TodoList data={todos} progress={'Done'}></TodoList>
 
