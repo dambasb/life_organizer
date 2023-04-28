@@ -129,7 +129,7 @@ export const updateTodo = (todo) => async (dispatch, getState) => {
       `/api/todos/${todo._id}`, todo,
       config
     )
-    console.log(data)
+
     dispatch({
       type: UPDATE_TODOS_SUCCESS,
       payload: data,

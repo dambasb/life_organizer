@@ -25,6 +25,10 @@ const ToDoScreen = () => {
     dispatch(getAllTodos())
   }, [dispatch, getAllTodos, successDelete, successUpdate])
 
+
+
+
+
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(createTodo(task, 'In Progress'))
@@ -34,6 +38,7 @@ const ToDoScreen = () => {
   return (
 
     <div className='container'>
+
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading || loadingDelete || loadingUpdate ? (
         <Loader />
