@@ -47,6 +47,7 @@ const TodoList = ({ data, progress }) => {
   }
 
   return (<>
+
     <h4>{progress}</h4>
 
     <Modal show={show} onHide={handleClose}>
@@ -69,12 +70,12 @@ const TodoList = ({ data, progress }) => {
         {
           (filteredData).map(function (item, key) {
             return (
-              <li key={key}>
+              <li key={key} className="tool">
                 {reduceText(item.filteredItems.text, 15)}
                 {reducedText}
                 <span className="todo__icons"><FontAwesomeIcon icon={faX} style={{ color: "#ff0000", }} onClick={e => deleteTodoData(item.filteredItems.text, item.filteredItems._id)} /></span>
                 <span className="todo__icons"><FontAwesomeIcon icon={faCheck} style={{ color: "#0000ff", }} onClick={e => changeTodoProgressHandler(item.filteredItems)} /></span>
-
+                {item.filteredItems.text.length > 14 && <span class="tooltiptext">{item.filteredItems.text}</span>}
               </li>
             )
           })
