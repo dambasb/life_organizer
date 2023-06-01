@@ -77,6 +77,28 @@ nav a{
   padding-bottom: 15px;
 }
 
+.screen__month {
+  padding-top: 40px;
+  padding-bottom: 15px;
+  float: right;
+}
+
+/* Activity */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+  margin-bottom: 10px;
+}
+
+.grid p {
+  height: 30px;
+  line-height: 30px;
+  margin: 0;
+}
+
+.grid span {
+  text-align: center;
+}
 
 /* Form General */
 form input {
